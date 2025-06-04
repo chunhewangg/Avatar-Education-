@@ -7,7 +7,7 @@ from PIL import Image
 import base64
 
 # Hardcoded API key (replace with your actual API key)
-API_KEY = "ZjVlYWVhZDVjMGMxNDcxYzk4OTc0NWRkYmMyNDg2YjAtMTczNjM4OTU4OA=="
+API_KEY = "########################################"
 
 # Simple password for website access
 WEBSITE_PASSWORD = "chatbot"  # You can change this to any password you prefer

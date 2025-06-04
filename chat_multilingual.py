@@ -89,9 +89,9 @@ If you experience issues, try using simpler sentences.
 
 
 # API Keys - Set directly in code
-CLAUDE_API_KEY = "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"
-OPENAI_API_KEY = "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"
-HEYGEN_API_KEY = "ZjVlYWVhZDVjMGMxNDcxYzk4OTc0NWRkYmMyNDg2YjAtMTczNjM4OTU4OA=="
+CLAUDE_API_KEY = "###########################################"
+OPENAI_API_KEY = "###########################################"
+HEYGEN_API_KEY = "###########################################"
 HEYGEN_API_URL = "https://api.heygen.com/v2"
 
 # Initialize Claude client
