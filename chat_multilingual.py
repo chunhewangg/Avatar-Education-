@@ -5,6 +5,8 @@ import time
 import os
 import anthropic
 import openai
+from dotenv import load_dotenv
+load_dotenv()
 
 # Streamlit app setup
 st.set_page_config(page_title="AI Avatar Chat", page_icon="🤖")
@@ -89,9 +91,9 @@ If you experience issues, try using simpler sentences.
 
 
 # API Keys - Set directly in code
-CLAUDE_API_KEY = "###########################################"
-OPENAI_API_KEY = "###########################################"
-HEYGEN_API_KEY = "###########################################"
+CLAUDE_API_KEY = os.getenv("CLAUDE_API_KEY")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+HEYGEN_API_KEY = os.getenv("HEYGEN_API_KEY")
 HEYGEN_API_URL = "https://api.heygen.com/v2"
 
 # Initialize Claude client

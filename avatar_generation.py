@@ -5,9 +5,12 @@ import time
 from io import BytesIO
 from PIL import Image
 import base64
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 # Hardcoded API key (replace with your actual API key)
-API_KEY = "########################################"
+API_KEY = os.getenv("HEYGEN_API_KEY")
 
 # Simple password for website access
 WEBSITE_PASSWORD = "chatbot"  # You can change this to any password you prefer
