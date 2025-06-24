@@ -1,10 +1,10 @@
 ---
-theme: none
+theme: default
+colorSchema: light
 background: '#ffffff'
 class: text-center
 highlighter: shiki
 lineNumbers: false
-colorSchema: light
 info: |
   ## AI Avatar Workshop
   Complete 5-Class Course for High School Students
@@ -13,181 +13,7 @@ drawings:
 transition: slide-left
 title: AI Avatar Workshop
 mdc: true
-css: unocss
 ---
-
-<style>
-/* AI Tech Theme - Light Mode */
-:root {
-  --slidev-theme-primary: #3b82f6;
-  --slidev-theme-secondary: #8b5cf6;
-  --slidev-theme-accent: #06b6d4;
-  --slidev-theme-neutral: #1f2937;
-  --slidev-code-background: #f8fafc;
-  --slidev-code-foreground: #374151;
-}
-
-.slidev-layout {
-  background: linear-gradient(135deg, #f8fafc 0%, #ffffff 50%, #f0f9ff 100%);
-  font-family: 'Inter', 'SF Pro Display', system-ui, sans-serif;
-  color: #1f2937;
-}
-
-/* Headers with tech gradient */
-h1 {
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6, #06b6d4);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-weight: 800;
-  font-size: 3rem !important;
-  margin-bottom: 1rem;
-}
-
-h2 {
-  color: #374151;
-  font-weight: 700;
-  font-size: 2rem !important;
-  margin-bottom: 0.75rem;
-}
-
-h3 {
-  color: #4b5563;
-  font-weight: 600;
-  font-size: 1.5rem !important;
-  margin-bottom: 0.5rem;
-}
-
-/* Tech-style buttons */
-button {
-  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-  border: none;
-  border-radius: 12px;
-  color: white;
-  font-weight: 600;
-  padding: 1rem 2rem;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
-}
-
-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
-}
-
-/* Tech card styles */
-.tech-card {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(59, 130, 246, 0.2);
-  border-radius: 16px;
-  padding: 1.5rem;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-}
-
-.tech-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-  border-color: rgba(59, 130, 246, 0.4);
-}
-
-/* AI-style gradients */
-.ai-gradient {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  border-radius: 16px;
-  padding: 2rem;
-}
-
-.tech-gradient {
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  color: white;
-  border-radius: 16px;
-  padding: 2rem;
-}
-
-.cyber-gradient {
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-  color: white;
-  border-radius: 16px;
-  padding: 2rem;
-}
-
-/* Code blocks with AI theme */
-.slidev-code {
-  background: #f8fafc !important;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 1rem;
-  font-family: 'JetBrains Mono', 'Fira Code', monospace;
-}
-
-/* Links with tech styling */
-a {
-  color: #3b82f6;
-  text-decoration: none;
-  font-weight: 600;
-  transition: all 0.3s ease;
-}
-
-a:hover {
-  color: #1d4ed8;
-  text-decoration: underline;
-}
-
-/* Success/celebration styles */
-.success-card {
-  background: linear-gradient(135deg, #10b981, #059669);
-  color: white;
-  border-radius: 16px;
-  padding: 2rem;
-  box-shadow: 0 8px 32px rgba(16, 185, 129, 0.3);
-}
-
-/* Warning/challenge styles */
-.challenge-card {
-  background: linear-gradient(135deg, #f59e0b, #d97706);
-  color: white;
-  border-radius: 16px;
-  padding: 2rem;
-  box-shadow: 0 8px 32px rgba(245, 158, 11, 0.3);
-}
-
-/* Section backgrounds */
-.section-bg-1 { background: linear-gradient(135deg, #e0e7ff 0%, #f0f9ff 100%); }
-.section-bg-2 { background: linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 100%); }
-.section-bg-3 { background: linear-gradient(135deg, #fef3c7 0%, #fef7cd 100%); }
-.section-bg-4 { background: linear-gradient(135deg, #fce7f3 0%, #fdf2f8 100%); }
-.section-bg-5 { background: linear-gradient(135deg, #fee2e2 0%, #fef2f2 100%); }
-
-/* Tech grid styling */
-.tech-grid {
-  display: grid;
-  gap: 1.5rem;
-  margin: 2rem 0;
-}
-
-/* Ensure light theme throughout */
-.dark .slidev-layout,
-.dark h1,
-.dark h2, 
-.dark h3,
-.dark p {
-  color: #1f2937 !important;
-  background: transparent !important;
-}
-
-/* Override any dark theme defaults */
-html.dark {
-  color-scheme: light !important;
-}
-
-.slidev-layout.dark {
-  background: linear-gradient(135deg, #f8fafc 0%, #ffffff 50%, #f0f9ff 100%) !important;
-  color: #1f2937 !important;
-}
-</style>
 
 # 🤖 AI Avatar Workshop
 ## Build Your Own Talking Avatar App!
@@ -258,15 +84,11 @@ background: '#ddd6fe'
 
 # 🚀 Your 5-Week Journey
 
-<div class="ai-gradient">
-
 **Week 1:** 🧠 AI Foundations + Python  
 **Week 2:** 🌐 Web Apps + APIs  
 **Week 3:** 🎭 Avatar Technology  
 **Week 4:** ⚡ Integration Magic  
 **Week 5:** 🏆 Group Projects & Demo  
-
-</div>  
 
 ---
 
@@ -393,15 +215,11 @@ Setting up Anthropic client, crafting prompts, processing AI responses
 ## 🏆 Build Your Chat Interface
 *30 minutes collaborative coding!*
 
-<div class="challenge-card">
-
 ### Challenge Levels:
 
 **🥉 Beginner** - Basic chat with Claude  
 **🥈 Intermediate** - Styled chat history  
 **🥇 Advanced** - Full-featured chat  
-
-</div>  
 
 ---
 
@@ -421,8 +239,6 @@ Setting up Anthropic client, crafting prompts, processing AI responses
 
 # 🏆 Success Celebration!
 
-<div class="success-card">
-
 ## What You've Accomplished Today:
 
 ✅ **Built a real web application** that runs in browsers  
@@ -430,8 +246,6 @@ Setting up Anthropic client, crafting prompts, processing AI responses
 ✅ **Created interactive chat interfaces** with styling  
 ✅ **Deployed to the cloud** - your app is public!  
 ✅ **Mastered modern web development** workflow  
-
-</div>  
 
 ### 🚀 Next Week: Avatar Generation Deep Dive!
 *We'll make our chatbot speak with realistic human faces*
