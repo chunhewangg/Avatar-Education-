@@ -8,7 +8,13 @@
       "Bash(npm install:*)",
       "Bash(rm:*)",
       "Bash(grep:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(npm run dev:*)",
+      "Bash(curl:*)",
+      "Bash(ss:*)",
+      "WebFetch(domain:sli.dev)",
+      "Bash(sed:*)",
+      "Bash(awk:*)"
     ],
     "deny": []
   }

@@ -135,27 +135,27 @@ npx slidev slides.md
 
 ### 🧠 Class 1: AI Foundations & Python Power
 - **Duration**: 2.5 hours
-- **Focus**: Understanding AI, Python basics, first chatbot
+- **Focus**: AI history from ancient times, mathematical foundations (Gödel, Turing), attention mechanisms, Python essentials
 - **Navigation**: Click "Class 1" button or go to slide 3
 
 ### 🌐 Class 2: Web Apps & API Magic  
 - **Duration**: 2.5 hours
-- **Focus**: Streamlit web apps, API integration
+- **Focus**: Web architecture patterns, HTTP protocol, RESTful APIs, Streamlit development, security practices
 - **Navigation**: Click "Class 2" button or go to slide 12
 
 ### 🎭 Class 3: Avatar Technology Deep Dive
 - **Duration**: 2.5 hours  
-- **Focus**: Digital humans, avatar generation APIs
+- **Focus**: Neural networks, CNNs, diffusion models, GANs, avatar generation pipeline with mathematical formulations
 - **Navigation**: Click "Class 3" button or go to slide 21
 
 ### ⚡ Class 4: Integration & Advanced Features
 - **Duration**: 2.5 hours
-- **Focus**: Combining components, advanced features
+- **Focus**: System architecture patterns, event-driven design, performance optimization, production deployment
 - **Navigation**: Click "Class 4" button or go to slide 30
 
 ### 🏆 Class 5: Group Projects & Demo Day
 - **Duration**: 2.5 hours
-- **Focus**: Team projects, presentations, celebration
+- **Focus**: Collaborative development, advanced features implementation, presentations, research methodology
 - **Navigation**: Click "Class 5" button or go to slide 39
 
 ## 🛠 Troubleshooting
