@@ -54,6 +54,9 @@ Thumbs.db
 *.swo
 *~
 
+# Claude Code settings
+.claude
+
 # Logs
 logs
 *.log
