@@ -14,7 +14,11 @@
       "Bash(ss:*)",
       "WebFetch(domain:sli.dev)",
       "Bash(sed:*)",
-      "Bash(awk:*)"
+      "Bash(awk:*)",
+      "Bash(python3:*)",
+      "Bash(npm run build:*)",
+      "Bash(mkdir:*)",
+      "Bash(timeout 5s npm run dev)"
     ],
     "deny": []
   }
