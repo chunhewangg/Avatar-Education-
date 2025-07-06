@@ -155,13 +155,13 @@ male_avatars = {k: v for k, v in avatar_options.items() if v["gender"] == "male"
 
 character_type = st.sidebar.radio(
     "Select Character Type",
-    options=["Avatar", "Talking Photo"],
+    options=["Video Avatar", "Photo Avatar"],
     index=0,  # Default to Avatar
     horizontal=True
 )
 
 # Replace your current avatar selection code with this conditional logic
-if character_type == "Avatar":
+if character_type == "Video Avatar":
     # Group avatars by gender for better organization
     gender_selection = st.sidebar.radio(
         "Select Gender",

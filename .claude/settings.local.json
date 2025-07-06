@@ -18,7 +18,8 @@
       "Bash(python3:*)",
       "Bash(npm run build:*)",
       "Bash(mkdir:*)",
-      "Bash(timeout 5s npm run dev)"
+      "Bash(timeout 5s npm run dev)",
+      "Bash(git add:*)"
     ],
     "deny": []
   }

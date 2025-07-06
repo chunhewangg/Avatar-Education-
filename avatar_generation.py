@@ -152,6 +152,84 @@ def get_upload_headers(content_type):
         "X-Api-Key": API_KEY
     }
 
+def get_recent_avatars(limit=3):
+    """Get the most recently created avatars"""
+    try:
+        # Get all avatar groups
+        response = requests.get(
+            "https://api.heygen.com/v2/avatar_group.list",
+            headers=get_headers()
+        )
+        
+        if response.status_code != 200:
+            print(f"Error getting avatar groups: {response.status_code}")
+            return []
+            
+        groups_data = response.json()
+        if groups_data.get("error") is not None:
+            print(f"Error in groups response: {groups_data.get('error')}")
+            return []
+            
+        # Extract the avatar groups
+        avatar_groups = groups_data.get("data", {}).get("avatar_group_list", [])
+        print(f"Found {len(avatar_groups)} avatar groups")
+        
+        # Sort groups by created_at timestamp to get most recent first
+        avatar_groups.sort(key=lambda x: x.get('created_at', 0), reverse=True)
+        
+        # Get all avatars from all groups
+        all_avatars = []
+        for group in avatar_groups:
+            group_id = group.get("id")
+            group_name = group.get("name", "Unknown Group")
+            created_at = group.get("created_at", 0)
+            
+            if not group_id:
+                continue
+                
+            print(f"Checking group: {group_name} (ID: {group_id}, created_at: {created_at})")
+                
+            # Get avatars for this group
+            avatars_response = requests.get(
+                f"https://api.heygen.com/v2/avatar_group/{group_id}/avatars",
+                headers=get_headers()
+            )
+            
+            if avatars_response.status_code != 200:
+                print(f"Error getting avatars for group {group_id}: {avatars_response.status_code}")
+                continue
+                
+            avatars_data = avatars_response.json()
+            if avatars_data.get("error") is not None:
+                print(f"Error in avatars response for group {group_id}: {avatars_data.get('error')}")
+                continue
+            
+            # Extract avatars from this group
+            group_avatars = avatars_data.get("data", {}).get("avatar_list", [])
+            print(f"Found {len(group_avatars)} avatars in group {group_name}")
+            
+            # Add group information and creation timestamp to each avatar
+            for avatar in group_avatars:
+                avatar["group_name"] = group_name
+                avatar["group_id"] = group_id
+                avatar["group_created_at"] = created_at
+                
+            all_avatars.extend(group_avatars)
+        
+        print(f"Total avatars found: {len(all_avatars)}")
+        
+        # Sort by group creation date first (most recent groups first), then by avatar ID
+        all_avatars.sort(key=lambda x: (x.get('group_created_at', 0), x.get('id', '')), reverse=True)
+        
+        # Show debug info for top avatars
+        for i, avatar in enumerate(all_avatars[:limit]):
+            print(f"Recent avatar {i+1}: {avatar.get('name', 'Unnamed')} (ID: {avatar.get('id')}, Group: {avatar.get('group_name')}, Group created: {avatar.get('group_created_at')})")
+        
+        return all_avatars[:limit]
+    except Exception as e:
+        print(f"Error getting recent avatars: {str(e)}")
+        return []
+
 def search_avatars(search_term):
     """Search avatars by name by first getting avatar groups and then finding avatars within those groups"""
     try:
@@ -173,19 +251,9 @@ def search_avatars(search_term):
         # Extract the avatar groups
         avatar_groups = groups_data.get("data", {}).get("avatar_group_list", [])
         
-        # Filter groups by search term if provided
-        if search_term:
-            search_term = search_term.lower()
-            filtered_groups = [
-                group for group in avatar_groups 
-                if search_term in group.get('name', '').lower()
-            ]
-        else:
-            filtered_groups = avatar_groups
-            
         # Step 2: For each group, get the avatars
         all_avatars = []
-        for group in filtered_groups:
+        for group in avatar_groups:
             group_id = group.get("id")
             if not group_id:
                 continue
@@ -212,6 +280,15 @@ def search_avatars(search_term):
                 avatar["group_id"] = group_id
                 
             all_avatars.extend(group_avatars)
+        
+        # Filter avatars by search term if provided
+        if search_term:
+            search_term = search_term.lower()
+            filtered_avatars = [
+                avatar for avatar in all_avatars 
+                if search_term in avatar.get('name', '').lower()
+            ]
+            all_avatars = filtered_avatars
         
         # If no results and we just finished training, add a delay and try again
         if len(all_avatars) == 0 and 'training_status' in st.session_state and st.session_state.training_status == "ready":
@@ -257,6 +334,7 @@ def generate_photo_avatar(avatar_attributes):
     try:
         # Create a properly formatted payload according to API docs
         payload = {
+            "name": avatar_attributes.get("name", "Generated Avatar"),
             "age": avatar_attributes.get("age"),
             "gender": avatar_attributes.get("gender"),
             "ethnicity": avatar_attributes.get("ethnicity"),
@@ -632,6 +710,38 @@ else:
             st.markdown("<h1 class='title'>Search Avatars</h1>", unsafe_allow_html=True)
             st.markdown("<p class='subtitle'>Find your existing avatars</p>", unsafe_allow_html=True)
             
+            # Display recent avatars
+            st.markdown("### Recently Created Avatars")
+            with st.spinner("Loading recent avatars..."):
+                recent_avatars = get_recent_avatars(3)
+            
+            if recent_avatars:
+                cols = st.columns(3)
+                for i, avatar in enumerate(recent_avatars):
+                    with cols[i]:
+                        st.markdown("<div class='card'>", unsafe_allow_html=True)
+                        st.markdown(f"<h4>{avatar.get('name', 'Unnamed Avatar')}</h4>", unsafe_allow_html=True)
+                        
+                        # Display preview image if available
+                        preview_url = avatar.get('image_url')
+                        if preview_url:
+                            st.image(preview_url, use_container_width=True)
+                        
+                        st.markdown(f"**ID**: `{avatar.get('id', 'N/A')}`")
+                        st.markdown(f"**Gender**: {avatar.get('gender', 'Not specified')}")
+                        
+                        if st.button(f"Select Avatar", key=f"select_recent_avatar_{i}"):
+                            st.session_state.avatar_id = avatar.get('id')
+                            st.success("Avatar selected successfully!")
+                            st.info(f"Selected Avatar ID: `{st.session_state.avatar_id}`")
+                        
+                        st.markdown("</div>", unsafe_allow_html=True)
+            else:
+                st.info("No recent avatars found.")
+            
+            st.markdown("---")
+            st.markdown("### Search for Specific Avatar")
+            
             # Avatar search functionality
             search_col1, search_col2 = st.columns([3, 1])
             with search_col1:
@@ -912,6 +1022,13 @@ else:
                         help="Select the visual style of your avatar"
                     )
                 
+                st.markdown("### Avatar Name")
+                avatar_name = st.text_input(
+                    "Enter a name for your avatar",
+                    value="Generated Avatar",
+                    help="This name will be used to identify your avatar"
+                )
+                
                 st.markdown("### Appearance Description")
                 appearance = st.text_area(
                     "Describe your avatar's appearance in detail",
@@ -920,11 +1037,14 @@ else:
                 )
                 
                 if st.button("Generate Images", use_container_width=True):
-                    if not appearance:
+                    if not avatar_name:
+                        st.error("Please provide an avatar name.")
+                    elif not appearance:
                         st.error("Please provide an appearance description.")
                     else:
                         st.session_state.appearance = appearance
                         st.session_state.avatar_attributes = {
+                            "name": avatar_name,
                             "age": age,
                             "gender": gender,
                             "ethnicity": ethnicity,
